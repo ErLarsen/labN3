@@ -10,6 +10,7 @@ public class Server {
     public static void main(String[] args) {
 
         try (ServerSocket ss = new ServerSocket(5555)) {
+            System.out.println("Server running...");
             ExecutorService pool = Executors.newFixedThreadPool(5);
             while (true) {
                 pool.execute(new ClientThread(ss.accept()));
@@ -29,7 +30,7 @@ public class Server {
         public void run() {
             try(BufferedReader in = new BufferedReader(new InputStreamReader(cs.getInputStream()));
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(cs.getOutputStream()), true)) {
-                System.out.println("Connection established to "+ cs.getInetAddress());
+                System.out.println("[" + cs.getInetAddress().getHostAddress() + "]" + " Connected!");
                 String request;
 
                 while ((request = in.readLine()) != null) {
@@ -57,6 +58,7 @@ public class Server {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            System.out.println("Connection with " + "[" + cs.getInetAddress().getHostAddress() + "] terminated");
         }
     }
 

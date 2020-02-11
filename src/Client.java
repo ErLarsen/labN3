@@ -17,7 +17,7 @@ public class Client {
             BufferedReader keyboardInput = new BufferedReader(new InputStreamReader(System.in));
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
             PrintWriter out = new PrintWriter(new OutputStreamWriter(s.getOutputStream()), true)) {
-            System.out.println("Connected established!");
+            System.out.println("Connection established -> " + "[" + s.getInetAddress().getHostAddress() + "]");
             String query, sResponse;
             while(true) {
                 System.out.print(">>> ");
@@ -42,6 +42,8 @@ public class Client {
 
 
         }
+        System.out.println("GOOD BYE!!");
+        System.out.println("Connection terminated");
         scanner.close();
     }
 }

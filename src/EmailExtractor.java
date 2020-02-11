@@ -8,12 +8,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EmailExtractor {
-    URL url;
-    StringBuilder html;
+    URL url; // url for webpage.
+    StringBuilder html; // contents of webpage.
+    // pattern found at https://www.freeformatter.com/java-regex-tester.html
     String pattern = "[-a-z0-9~!$%^&*_=+}{'?]+(\\.[-a-z0-9~!$%^&*_=+}{'?]+)*@([a-z0-9_][-a-z0-9_]*(\\.[-a-z0-9_]+)*\\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,5})?";
-    Set<String> emails = new HashSet<>();
+    Set<String> emails = new HashSet<>(); // hashset; prevents duplicate emails.
     int responseNum;
-    EmailExtractor(String url) {
+    public EmailExtractor(String url) {
         try {
             this.url = new URL(url);
         } catch (MalformedURLException e) {
@@ -21,7 +22,7 @@ public class EmailExtractor {
         }
     }
 
-    void extract() {
+    public void extract() {
         if(readPage()) {
             Pattern p = Pattern.compile(pattern);
             Matcher m = p.matcher(html);
